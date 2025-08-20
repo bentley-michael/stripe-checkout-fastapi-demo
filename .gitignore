@@ -1,0 +1,25 @@
+@"
+# Python / FastAPI
+__pycache__/
+*.py[cod]
+*.pyo
+*.log
+.venv/
+
+# Local env & secrets
+.env
+
+# IDE / OS cruft
+.vscode/
+.idea/
+.DS_Store
+
+# Build / cache
+dist/
+build/
+.pytest_cache/
+
+# Generated PDFs
+TariffTest*.pdf
+TariffOrder*.pdf
+"@ | Out-File -Encoding utf8 .gitignore

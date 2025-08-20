@@ -1,0 +1,41 @@
+{
+  "preset_name": "coffee",
+  "title": "Coffee Import Preset",
+  "defaults": {
+    "incoterm": "FOB",
+    "country_of_origin": "Brazil",
+    "destination": "United States",
+    "insurance": 0.5,
+    "brokerage": 125.0,
+    "freight": 480.0,
+    "other_fees": 0.0,
+    "base_rate": 0.0,
+    "tariff_rate": 0.0,
+    "merch_value": 2500.0
+  },
+  "suggested_hs_codes": [
+    {
+      "label": "Green coffee, not roasted, not decaf (0901.11)",
+      "code": "090111"
+    },
+    {
+      "label": "Decaffeinated green coffee (0901.12)",
+      "code": "090112"
+    },
+    {
+      "label": "Roasted coffee, not decaf (0901.21)",
+      "code": "090121"
+    },
+    {
+      "label": "Roasted coffee, decaf (0901.22)",
+      "code": "090122"
+    }
+  ],
+  "example_line_item": {
+    "sku": "BRAZIL-COFFEE-60KG",
+    "description": "Green coffee beans \u2014 60kg bag",
+    "unit_value": 5.2,
+    "qty": 60,
+    "unit_wt": 1.0
+  }
+}

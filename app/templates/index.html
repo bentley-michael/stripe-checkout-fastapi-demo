@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ClearTariff — Amazon Sellers Duty & Landed Cost</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid #eee; }
+    .logo { font-weight:800; letter-spacing:0.3px; }
+    nav a { margin-left:16px; text-decoration:none; color:#111827; }
+    .hero { max-width:980px; margin:48px auto; padding:0 24px; text-align:center; }
+    h1 { font-size:32px; margin-bottom:8px; }
+    p.muted { color:#555; }
+    .btns { margin-top:20px; }
+    .btn { display:inline-block; padding:12px 18px; border-radius:10px; text-decoration:none; }
+    .primary { background:#111827; color:#fff; }
+    .secondary { border:1px solid #111827; color:#111827; }
+    footer { text-align:center; padding:24px; color:#777; border-top:1px solid #eee; margin-top:60px; }
+  </style>
+</head>
+<body>
+<!-- Trust & headline block (injected 2025-08-20T19:29:07.613907Z) -->
+<section class="trust-block" style="max-width: 980px; margin: 12px auto 20px; padding: 16px 18px; border:1px solid #eee; border-radius: 14px; background:#fafafa;">
+  <h1 style="margin:0 0 6px; font-size: 26px;">Amazon Sellers: Instantly Calculate Your True Landed Cost & Duties</h1>
+  <p style="margin: 0; color:#444;">Save hours of guesswork and avoid costly surprises — get a professional cost breakdown in seconds. Download a branded PDF report for your records.</p>
+</section>
+
+  <header>
+    <div class="logo">ClearTariff</div>
+    <nav>
+      <a href="/form">Calculate</a>
+      <a href="/pricing">Pricing</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Know Your <em>Landed Cost Per Unit</em> in Minutes</h1>
+    <p class="muted">Amazon sellers use ClearTariff to estimate duties and true landed cost before sending inventory to FBA. Avoid surprises. Price with confidence.</p>
+    <div class="btns">
+      <a class="btn primary" href="/form">Calculate Now</a>
+      <a class="btn secondary" href="/pricing">View Pricing</a>
+    </div>
+  </section>
+
+  <footer>© 2025 ClearTariff — Estimation tool only. Verify HS codes and rates with your broker.</footer>
+
+<script>
+// Amazon seller presets -> HS code + indicative duty %
+// NOTE: Users can override these; values are illustrative and must be confirmed.
+const AMAZON_PRESETS = {
+  "": {"hs":"", "duty": ""},
+  "Electronics & Accessories": {"hs":"8517.62.0090", "duty":"0"},          // many phone accessories ~0%
+  "Home & Kitchen": {"hs":"7323.93.0080", "duty":"2.9"},                    // kitchenware (example)
+  "Health & Beauty": {"hs":"3304.99.5000", "duty":"0"},                     // cosmetics/examples vary
+  "Clothing & Apparel": {"hs":"6109.10.0004", "duty":"16.5"},               // knit cotton t-shirts
+  "Toys & Games": {"hs":"9503.00.0073", "duty":"0"},                        // many toys are 0%
+  "Sports & Outdoors": {"hs":"9506.99.6080", "duty":"2.4"}                  // sporting goods (example)
+};
+
+function applyPreset(sel){
+  const val = sel.value;
+  const p = AMAZON_PRESETS[val] || {hs:"", duty:""};
+  const hs = document.querySelector('#hs_code, [name="hs_code"], input[data-role="hs_code"]');
+  const duty = document.querySelector('#duty_rate, [name="duty_rate"], input[data-role="duty_rate"]');
+  if(hs){ hs.value = p.hs || hs.value; }
+  if(duty){ duty.value = p.duty || duty.value; }
+}
+</script>
+
+</body>
+</html>
+<!-- Amazon-seller category presets -->
+<label for="amazon_category" style="font-weight:600; margin-top:12px; display:block;">Choose a product category (optional)</label>
+<select id="amazon_category" name="amazon_category" onchange="applyPreset(this)" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:8px;">
+  <option value="">— Select a common Amazon category —</option>
+  <option>Electronics & Accessories</option>
+  <option>Home & Kitchen</option>
+  <option>Health & Beauty</option>
+  <option>Clothing & Apparel</option>
+  <option>Toys & Games</option>
+  <option>Sports & Outdoors</option>
+</select>
+<p class="help" style="font-size:12px; color:#666; margin-top:6px;">Tip: Pick a category to auto-fill a starting HS code and duty %. You can always adjust these.</p>

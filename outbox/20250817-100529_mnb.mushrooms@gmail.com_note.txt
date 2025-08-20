@@ -1,0 +1,7 @@
+TO: mnb.mushrooms@gmail.com
+FROM: contact@content365.xyz (Nathan Bentley)
+CC: -
+BCC: -
+SUBJECT: Your Tariff & Landed Cost Report
+
+Attached is your generated Tariff & Landed Cost Report. Thanks for using Tariff Tool!

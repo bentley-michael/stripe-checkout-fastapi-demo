@@ -1,0 +1,41 @@
+{
+  "preset_name": "tea",
+  "title": "Tea Import Preset",
+  "defaults": {
+    "incoterm": "FOB",
+    "country_of_origin": "India",
+    "destination": "United States",
+    "insurance": 0.5,
+    "brokerage": 125.0,
+    "freight": 520.0,
+    "other_fees": 0.0,
+    "base_rate": 0.0,
+    "tariff_rate": 0.0,
+    "merch_value": 2200.0
+  },
+  "suggested_hs_codes": [
+    {
+      "label": "Green tea, loose, \u22643kg (0902.10)",
+      "code": "090210"
+    },
+    {
+      "label": "Other green tea (0902.20)",
+      "code": "090220"
+    },
+    {
+      "label": "Black tea (fermented) \u22643kg (0902.30)",
+      "code": "090230"
+    },
+    {
+      "label": "Other black tea (0902.40)",
+      "code": "090240"
+    }
+  ],
+  "example_line_item": {
+    "sku": "ASSAM-TEA-25KG",
+    "description": "Black tea \u2014 25kg",
+    "unit_value": 4.1,
+    "qty": 25,
+    "unit_wt": 1.0
+  }
+}

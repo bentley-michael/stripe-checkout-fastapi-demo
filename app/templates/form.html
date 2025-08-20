@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ClearTariff — Amazon Sellers Landed Cost & Duty Calculator</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root { --bg:#f8f9fb; --card:#fff; --ink:#222; --muted:#666; --line:#e6e8ee; --brand:#1e66ff; }
+    body { margin:0; font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; color:var(--ink); background:var(--bg); }
+    .wrap { max-width: 980px; margin: 32px auto; padding: 0 16px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:0 2px 8px rgba(0,0,0,.03); }
+    .head { padding:20px 20px 0 20px; }
+    h1 { margin:0 0 6px; font-size:22px; }
+    p.muted { margin:0 0 16px; color:var(--muted); }
+    form { padding:20px; }
+    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .grid-3 { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; }
+    .row { margin-bottom:12px; }
+    label { display:block; font-weight:600; margin-bottom:6px; }
+    input, select, textarea {
+      width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; box-sizing:border-box;
+    }
+    textarea { min-height:88px; resize:vertical; }
+    .hint { font-size:12px; color:var(--muted); margin-top:6px; }
+    .actions { display:flex; gap:10px; align-items:center; margin-top:6px; }
+    button.primary {
+      background:var(--brand); color:#fff; border:0; border-radius:10px; padding:10px 14px; cursor:pointer; font-weight:600;
+    }
+    .badge { font-size:12px; color:var(--muted); margin-left:auto; }
+    .foot { padding:12px 20px 18px; border-top:1px solid var(--line); display:flex; justify-content:space-between; color:var(--muted); }
+    @media (max-width: 720px){ .grid-2, .grid-3 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="head">
+        <h1>Amazon Sellers: Landed Cost & Duty Calculator</h1>
+        <p class="muted">Enter your product and shipment details. We’ll generate a clean PDF with duty and landed cost estimates.</p>
+      </div>
+      <form method="post" action="/generate">
+        <!-- Product -->
+        <div class="row grid-3">
+          <div>
+            <label for="asin">ASIN (optional)</label>
+            <input id="asin" name="asin" placeholder="B0XXXXXX" />
+          </div>
+          <div>
+            <label for="sku">SKU (optional)</label>
+            <input id="sku" name="sku" placeholder="ABC-123" />
+          </div>
+          <div>
+            <label for="product_name">Product Name</label>
+            <input id="product_name" name="product_name" placeholder="Stainless steel coffee tumbler" />
+          </div>
+        </div>
+
+        <!-- Classification -->
+        <div class="row grid-3">
+          <div>
+            <label for="hs_code">HS Code</label>
+            <input id="hs_code" name="hs_code" placeholder="3924.10.4000" />
+            <div class="hint">Tip: Use 6–10 digits; we won’t validate beyond formatting in Phase 1.</div>
+          </div>
+          <div>
+            <label for="country_of_origin">Country of Origin</label>
+            <input id="country_of_origin" name="country_of_origin" placeholder="CN, VN, MX…" />
+          </div>
+          <div>
+            <label for="market">Market</label>
+            <select id="market" name="market">
+              <option value="US" selected>United States (US)</option>
+              <option value="UK">United Kingdom (UK)</option>
+              <option value="EU">European Union (EU)</option>
+              <option value="CA">Canada (CA)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Commercial terms -->
+        <div class="row grid-2">
+          <div>
+            <label for="incoterm">Incoterm</label>
+            <select id="incoterm" name="incoterm">
+              <option value="FOB" selected>FOB</option>
+              <option value="EXW">EXW</option>
+              <option value="CIF">CIF</option>
+              <option value="DAP">DAP</option>
+            </select>
+          </div>
+          <div>
+            <label for="duty_rate_pct">Duty Rate (%)</label>
+            <input id="duty_rate_pct" name="duty_rate_pct" type="number" step="0.01" placeholder="e.g., 3 or 27.5" />
+            <div class="hint">If you know it—enter a % like 5. If blank, we’ll still generate using other inputs.</div>
+          </div>
+        </div>
+
+        <!-- Quantities / values -->
+        <div class="row grid-3">
+          <div>
+            <label for="units">Units</label>
+            <input id="units" name="units" type="number" step="1" placeholder="1000" />
+          </div>
+          <div>
+            <label for="unit_value_usd">Unit Value (USD)</label>
+            <input id="unit_value_usd" name="unit_value_usd" type="number" step="0.01" placeholder="2.75" />
+          </div>
+          <div>
+            <label for="fba_prep_usd">FBA/Prep (USD)</label>
+            <input id="fba_prep_usd" name="fba_prep_usd" type="number" step="0.01" placeholder="0.35" />
+          </div>
+        </div>
+
+        <!-- Shipment costs -->
+        <div class="row grid-3">
+          <div>
+            <label for="freight_usd">Freight (USD)</label>
+            <input id="freight_usd" name="freight_usd" type="number" step="0.01" placeholder="500.00" />
+          </div>
+          <div>
+            <label for="insurance_usd">Insurance (USD)</label>
+            <input id="insurance_usd" name="insurance_usd" type="number" step="0.01" placeholder="25.00" />
+          </div>
+          <div>
+            <label for="other_costs_usd">Other Costs (USD)</label>
+            <input id="other_costs_usd" name="other_costs_usd" type="number" step="0.01" placeholder="75.00" />
+          </div>
+        </div>
+
+        <!-- Parties + notes -->
+        <div class="row grid-2">
+          <div>
+            <label for="buyer">Buyer (optional)</label>
+            <input id="buyer" name="buyer" placeholder="Your company name" />
+          </div>
+          <div>
+            <label for="seller">Seller (optional)</label>
+            <input id="seller" name="seller" placeholder="Supplier/Factory name" />
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="usd_fx_note">USD / FX Note (optional)</label>
+          <input id="usd_fx_note" name="usd_fx_note" placeholder="e.g., USD=base currency; FX handled by supplier" />
+        </div>
+
+        <div class="row">
+          <label for="notes">Internal Notes (optional)</label>
+          <textarea id="notes" name="notes" placeholder="Anything you want to show on the PDF (batch, carton, labels, etc.)"></textarea>
+        </div>
+
+        <!-- Email (optional) -->
+        <div class="row grid-2">
+          <div>
+            <label for="email">Email (optional)</label>
+            <input id="email" name="email" type="email" placeholder="name@company.com (we’ll send the PDF)" />
+          </div>
+          <div class="actions" style="align-items:flex-end;">
+            <button class="primary" type="submit">Generate PDF</button>
+            <span class="badge">Phase 1 • Fast estimate</span>
+          </div>
+        </div>
+      </form>
+      <div class="foot">
+        <span>© 2025 ClearTariff</span>
+        <span>For guidance only</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
