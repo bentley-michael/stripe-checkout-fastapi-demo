@@ -9,10 +9,11 @@ async def cancel():
     return HTMLResponse(
         """
         <html>
-            <head><title>ClearTariff - Checkout canceled</title></head>
+            <head><title>Cancel</title></head>
             <body>
-                <h2>ClearTariff - Checkout canceled</h2>
-                <p>No charge was made. You can try again any time.</p>
+                <h1>Cancel</h1>
+                <p>Demo cancel page</p>
+                <p><a href="/">Back to home</a></p>
             </body>
         </html>
         """
@@ -36,7 +37,9 @@ async def home():
             <head><title>ClearTariff</title></head>
             <body>
                 <h1>ClearTariff</h1>
-                <p>Service is up.</p>
+                <p>ClearTariff demo is running</p>
+                <p><a href="/success">Success</a></p>
+                <p><a href="/cancel">Cancel</a></p>
             </body>
         </html>
         """
