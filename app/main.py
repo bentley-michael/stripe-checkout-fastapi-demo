@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional, List
 
 import stripe
+import uvicorn
 from fastapi import FastAPI, Response, Form, Request, HTTPException, Query
 from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -771,3 +772,7 @@ def amazon_form(request: Request):
 @app.get("/marketing", response_class=HTMLResponse)
 def marketing(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
